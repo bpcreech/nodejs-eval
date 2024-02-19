@@ -10,9 +10,22 @@ from aiohttp import ClientSession, UnixConnector
 from nodejs.npx import Popen
 
 
+def _format_err(err):
+    if "cause" in err:
+        return "".join(
+            [
+                err["error"],
+                "\n    Caused by ",
+                "\n    ".join(_format_err(err["cause"]).split("\n")),
+            ]
+        )
+
+    return err["error"]
+
+
 class JavaScriptError(Exception):
     def __init__(self, err):
-        super(f"Error evaluating JavaScript: {err}")
+        super().__init__(f"Error evaluating JavaScript: {_format_err(err)}")
         self.error = err
 
 
@@ -108,6 +121,6 @@ class _Evaluator:
             j = await res.json()
 
             if "error" in j:
-                raise JavaScriptError(j["error"])
+                raise JavaScriptError(j)
 
             return j.get("result")
