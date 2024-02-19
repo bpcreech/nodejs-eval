@@ -10,7 +10,7 @@ from aiohttp import ClientSession, UnixConnector
 from nodejs.npx import Popen
 
 
-def _format_err(err):
+def _format_err(err) -> str:
     if "cause" in err:
         return "".join(
             [
