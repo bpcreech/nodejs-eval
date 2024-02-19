@@ -54,6 +54,26 @@ cov = [
   "cov-report",
 ]
 
+[tool.hatch.envs.style]
+detached = true
+dependencies = [
+  "flake8",
+  "black",
+  "isort",
+]
+
+[tool.hatch.envs.style.scripts]
+check = [
+  "flake8 .",
+  "black --check --diff .",
+  "isort --check-only --diff .",
+]
+fmt = [
+  "isort .",
+  "black .",
+  "check",
+]
+
 [[tool.hatch.envs.all.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
