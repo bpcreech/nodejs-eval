@@ -69,13 +69,13 @@ async def test_concurrency_async():
             e.run_async(
                 """
 await new Promise(r => setTimeout(r, 2000));
-return 42;
+return 6*7;
 """
             )
             for _ in range(10)
         ]
         results = await gather(*futures)
-        assert results[0] == 42
+        assert all(r == 42 for r in results)
         # We just ran 10 evaluations of something that sleeps 2 seconds, for
         # a total of 20 seconds spent sleeping.
         # However, because we ran concurrently, it should have taken just a
