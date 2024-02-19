@@ -57,7 +57,9 @@ async def test_state_async():
 @pytest.mark.asyncio
 async def test_import_async():
     async with evaluator() as e:
-        result = await e.run_async('let os = await import("os"); return os.cpus();')
+        result = await e.run_async(
+            'let os = await import("os"); return os.cpus();'
+        )
         assert len(result) > 0
 
 

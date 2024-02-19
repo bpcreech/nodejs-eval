@@ -34,6 +34,9 @@ Documentation = "https://github.com/bpcreech/nodejs-eval#readme"
 Issues = "https://github.com/bpcreech/nodejs-eval/issues"
 Source = "https://github.com/bpcreech/nodejs-eval"
 
+[tool.black]
+line-length = 80
+
 [tool.hatch.version]
 path = "src/nodejs_eval/__about__.py"
 
@@ -61,6 +64,7 @@ dependencies = [
   "flake8",
   "black",
   "isort",
+  "mdformat",
 ]
 
 [tool.hatch.envs.style.scripts]
@@ -73,6 +77,7 @@ fmt = [
   "isort .",
   "black .",
   "check",
+  "mdformat *.md",
 ]
 
 [[tool.hatch.envs.all.matrix]]

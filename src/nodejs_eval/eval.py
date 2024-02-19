@@ -35,7 +35,9 @@ class JavaScriptError(Exception):
         self.error: JavaScriptErrorObject = err
 
 
-async def _poll(checker: Callable[[], bool], step: float, timeout: float) -> None:
+async def _poll(
+    checker: Callable[[], bool], step: float, timeout: float
+) -> None:
     start = time()
     while True:
         if checker():
@@ -95,7 +97,9 @@ class Evaluator:
 
     async def _run(self, code: str, *, is_async: bool) -> Any:
         async with self.__session.post(
-            "http://bogus/run", json={"code": code}, params={"async": str(is_async).lower()}
+            "http://bogus/run",
+            json={"code": code},
+            params={"async": str(is_async).lower()},
         ) as res:
             j = await res.json()
 
@@ -119,12 +123,17 @@ async def evaluator() -> AsyncGenerator[Evaluator, None]:
     try:
         sock_name = join(tmp_dir.name, "http.sock")
 
-        p = Popen(["http-eval", "http-eval", "--udsPath", sock_name], start_new_session=True)
+        p = Popen(
+            ["http-eval", "http-eval", "--udsPath", sock_name],
+            start_new_session=True,
+        )
         try:
             # Wait for the server to open the socket:
             await _poll(lambda: exists(sock_name), timeout=5, step=0.1)
 
-            async with UnixConnector(path=sock_name) as conn, ClientSession(connector=conn) as session:
+            async with UnixConnector(path=sock_name) as conn, ClientSession(
+                connector=conn
+            ) as session:
                 yield Evaluator(session)
         finally:
             # npx creates subprocesses. If we just interrupt our child,
