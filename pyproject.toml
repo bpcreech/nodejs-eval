@@ -11,7 +11,7 @@ requires-python = ">=3.8"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "Ben Creech", email = "hi@bpcreech.com" },
+  { name = "Ben Creech", email = "ben@bpcreech.com" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -24,7 +24,14 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = [
+  "nodejs-bin",
+  # See https://github.com/msabramo/requests-unixsocket/issues/70
+  # requests_unixsocket has a small unresolved incompatibility with urllib3 v2
+  # and appears to be in abandonment. This replacement works:
+  "parsys-requests-unixsocket",
+  "polling2",
+]
 
 [project.urls]
 Documentation = "https://github.com/bpcreech/nodejs-eval#readme"
@@ -57,7 +64,6 @@ python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 [tool.hatch.envs.types]
 dependencies = [
   "mypy>=1.0.0",
-  "nodejs-bin",
 ]
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/nodejs_eval tests}"
