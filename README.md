@@ -43,7 +43,7 @@ Note that the NodeJS evaluator always only supports `async` mode on the Python
 side. However, the supplied JavaScript code can be either sync or async.
 
 ```python
-    from nodejs_eval.eval import evaluator
+    from nodejs_eval import evaluator
 
     async with evaluator() as e:
         result = await e.run("return 6*7;")
@@ -53,7 +53,7 @@ side. However, the supplied JavaScript code can be either sync or async.
 ### Basic asynchronous call
 
 ```python
-    from nodejs_eval.eval import evaluator
+    from nodejs_eval import evaluator
 
     async with evaluator() as e:
         result = await e.run_async(
@@ -70,7 +70,7 @@ Evaluations run with a consistent JavaScript `this` context, so state can be
 stored on it:
 
 ```python
-    from nodejs_eval.eval import evaluator
+    from nodejs_eval import evaluator
 
     async with evaluator() as e:
         await e.run("this.x = 6*7;")
@@ -87,7 +87,7 @@ to import other modules.
 This is easiest done in `async` mode:
 
 ```python
-    from nodejs_eval.eval import evaluator
+    from nodejs_eval import evaluator
 
     async with evaluator() as e:
         result = await e.run_async(

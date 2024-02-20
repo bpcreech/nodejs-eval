@@ -3,7 +3,7 @@ from time import time
 
 import pytest
 
-from nodejs_eval.eval import JavaScriptError, evaluator
+from nodejs_eval import JavaScriptError, evaluator
 
 
 @pytest.mark.asyncio
