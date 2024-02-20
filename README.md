@@ -5,7 +5,7 @@ Evaluate arbitrary JavaScript from Python, using a NodeJS sidecar process.
 This combines:
 
 - The Python [`nodejs-bin`](https://pypi.org/project/nodejs-bin/) project, which
-  bundles NodeJS (with `npm` and `npx`) into a PyPI package.
+  bundles NodeJS (with `npm` and `npx`) into a PyPI package, and
 - The JavaScript/TypeScript
   [`http-eval`](https://www.npmjs.com/package/http-eval) project, which runs a
   JavaScript evaluation server on a Unix domain socket.

@@ -124,7 +124,7 @@ async def evaluator() -> AsyncGenerator[Evaluator, None]:
         sock_name = join(tmp_dir.name, "http.sock")
 
         p = Popen(
-            ["http-eval", "http-eval", "--udsPath", sock_name],
+            ["http-eval", "--udsPath", sock_name],
             start_new_session=True,
         )
         try:
